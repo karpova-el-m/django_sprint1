@@ -5,7 +5,7 @@
 {% endblock %}
 {% block content %}
   <h1>Лента записей</h1>     
-  {% for post in posts_list %}
+  {% for post in posts %}
   <hr>
   <article>
   <ul>
@@ -16,13 +16,12 @@
     Дата: {{ post.date }}
     </li>
     <li>
-    Категория: <a href="{% url "blog:category" post.category %}">{{ post.category }}</a>
-    </li>
+    Категория: <a href="{% url "blog:category_posts" post.category %}">{{ post.category }}</a>
+  </li>
   </ul> 
   <p>
     {{ post.text|truncatewords:10 }}
   </p>
-  {% comment %} <a href="{% url "blog:post_detail" post.category post.id %}">Читать полный текст</a> {% endcomment %}
   <a href="{% url "blog:post_detail" post.id %}">Читать полный текст</a>
   </article>
   {% endfor %}
