@@ -152,3 +152,9 @@ media/
 build_tests/
 yap_testing
 html/img/img/
+
+# Шаблоны
+html/
+
+# Статика 
+blogicum/static_dev/
