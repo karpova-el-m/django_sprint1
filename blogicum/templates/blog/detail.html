@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %} 
+    {{ posts.location }}. {{ posts.date }}
+{% endblock %}
+{% block content %}
+<article>
+  <ul>
+    <li>
+      Место: {{ posts.location }}           
+    </li>
+    <li>
+      Дата: {{ posts.date }}
+    </li>
+    <li>
+      Категория: <a href="{{ posts.category }}">{{ posts.category }}</a>
+    </li>
+  </ul>         
+  <p>
+    {{ posts.text }}
+  </p>
+</article>
+{% endblock %}

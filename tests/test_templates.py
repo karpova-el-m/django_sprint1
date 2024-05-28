@@ -1,4 +1,4 @@
-import re
+`import re
 
 import pytest
 from pytest_django.asserts import assertTemplateUsed
