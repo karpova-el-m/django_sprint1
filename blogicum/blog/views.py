@@ -44,22 +44,31 @@ posts: list[dict] = [
     },
 ]
 
-posts_dict: dict = {post['id']: post for post in posts}
+posts_dict: dict[int, dict] = {post['id']: post for post in posts}
 
 
 def index(request):
-    context = {'posts': posts_dict.values()}
-    return render(request, 'blog/index.html', context)
+    return render(
+        request,
+        'blog/index.html',
+        {'posts': posts_dict.values()}
+    )
 
 
 def post_detail(request, post_id):
-    if post_id in posts_dict:
-        context = {'post': posts_dict[post_id]}
-        return render(request, 'blog/detail.html', context)
-    else:
+    if post_id not in posts_dict:
         raise Http404("Страница не существует")
+    else:
+        return render(
+            request,
+            'blog/detail.html',
+            {'post': posts_dict[post_id]}
+        )
 
 
 def category_posts(request, category_slug):
-    context = {'slug': category_slug}
-    return render(request, 'blog/category.html', context)
+    return render(
+        request,
+        'blog/category.html',
+        {'slug': category_slug}
+    )
