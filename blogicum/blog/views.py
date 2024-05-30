@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import Http404
+from typing import Union
 
-posts: list[dict] = [
+posts: list[dict[str, Union[int, str]]] = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
@@ -44,7 +45,9 @@ posts: list[dict] = [
     },
 ]
 
-posts_dict: dict[int, dict] = {post['id']: post for post in posts}
+posts_dict: dict[int, dict[str, Union[int, str]]] = {
+    post['id']: post for post in posts
+}
 
 
 def index(request):
@@ -58,12 +61,11 @@ def index(request):
 def post_detail(request, post_id):
     if post_id not in posts_dict:
         raise Http404("Страница не существует")
-    else:
-        return render(
-            request,
-            'blog/detail.html',
-            {'post': posts_dict[post_id]}
-        )
+    return render(
+        request,
+        'blog/detail.html',
+        {'post': posts_dict[post_id]}
+    )
 
 
 def category_posts(request, category_slug):
